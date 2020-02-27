@@ -179,7 +179,7 @@ public class BST {
 		if (this.isEmpty()) {
 			return null;
 		}
-		TreeIterator p = new TreeIterator(this.root);
+		var p = new TreeIterator(this.root);
 		while (p.hasNext()) {
 			try {
 				p.next();

@@ -206,33 +206,26 @@ public class BST {
 			if (t.currentNode.right != null)
 				data.add(t.currentNode.right.data);
 		}
-		//data.forEach(System.out::println);
+		// data.forEach(System.out::println);
 	}
 
-	public int findNextData(int n) throws Exception {
+	public int findNextData(int n) {
 		// Implement this method
 		if (this.isEmpty())
 			return n;
-		var p = (TreeIterator) this.find(n);
-		if (p == null) {
-			p = (TreeIterator) this.insert(n);
-			if (!p.hasNext()) {
-				this.remove(n);
-				return n;
+		var p = (TreeIterator) this.findMin(this.root);
+		try {
+			while (p.currentNode != null) {
+				int temp = p.currentNode.data;
+				if (temp == n)
+					return p.next();
+				else if (temp > n)
+					return temp;
+				p.next();
 			}
-			p.next();
-			int data = p.currentNode.data;
-			this.remove(n);
-			if (data > n)
-				return data;
-			return n;
+		} catch (Exception e) {
+			e.fillInStackTrace();
 		}
-		if (!p.hasNext())
-			return n;
-		p.next();
-		int data = p.currentNode.data;
-		if (data > n)
-			return data;
 		return n;
 	}
 
